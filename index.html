@@ -784,8 +784,8 @@
                 `${matrixResults.yColumn} vs ${matrixResults.xColumn} Matrix Analysis`;
             
             // Update labels
-            document.getElementById('topLabel').textContent = `Strong ${matrixResults.yColumn}`;
-            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.yColumn}`;
+            document.getElementById('topLabel').textContent = `Weak ${matrixResults.xColumn}`;
+            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.xColumn}`;
             document.getElementById('leftLabelTop').textContent = `Strong ${matrixResults.yColumn}`;
             document.getElementById('leftLabelBottom').textContent = `Weak ${matrixResults.yColumn}`;
 
@@ -836,7 +836,7 @@
                 { key: 'q1', title: 'Strong X + Strong Y', color: '#0969da' },
                 { key: 'q2', title: 'Weak X + Strong Y', color: '#fb8500' },
                 { key: 'q3', title: 'Weak X + Weak Y', color: '#dc2626' },
-                { key: 'q4', title: 'Strong X + Weak Y', color: '#7c3aed' }
+                { key: 'q4', title: 'Strong X + Weak Y', color: '#10b981' }
             ];
 
             statsGrid.innerHTML = '';
