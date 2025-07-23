@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Matrix Analyzer</title>
-    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
@@ -324,44 +323,25 @@
         }
 
         .data-point {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 2px solid white;
+            display: inline-block;
+            margin: 2px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
             cursor: pointer;
             transition: all 0.2s ease;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
-            font-weight: bold;
-            color: white;
         }
 
         .data-point:hover {
-            transform: scale(1.3);
-            z-index: 15;
+            transform: scale(1.05);
         }
 
         .data-point.q1 { background: #22c55e; }
         .data-point.q2 { background: #eab308; }
         .data-point.q3 { background: #ef4444; }
         .data-point.q4 { background: #3b82f6; }
-
-        .tooltip {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            pointer-events: none;
-            z-index: 20;
-            white-space: nowrap;
-            display: none;
-        }
 
         .stats-grid {
             display: grid;
@@ -397,9 +377,13 @@
         }
 
         .stat-card.q1 { border-left-color: #22c55e; }
+        .stat-card.q1 .count { color: #22c55e; }
         .stat-card.q2 { border-left-color: #eab308; }
+        .stat-card.q2 .count { color: #eab308; }
         .stat-card.q3 { border-left-color: #ef4444; }
+        .stat-card.q3 .count { color: #ef4444; }
         .stat-card.q4 { border-left-color: #3b82f6; }
+        .stat-card.q4 .count { color: #3b82f6; }
 
         .data-info {
             background: #f1f5f9;
@@ -453,7 +437,7 @@
     <div class="container">
         <div class="header">
             <h1>Universal Matrix Analyzer</h1>
-            <p>Visualize relationships between any two variables with flexible threshold methods</p>
+            <p>Visualize relationships between numeric variables with flexible threshold methods</p>
         </div>
 
         <div class="content">
@@ -510,7 +494,7 @@
                                         <option value="percentile">Percentile</option>
                                     </select>
                                 </div>
-                                <input type="text" id="xThreshold" placeholder="Enter threshold value">
+                                <input type="number" id="xThreshold" step="any" placeholder="Enter threshold value">
                             </div>
                             <div class="threshold-group">
                                 <h4>Y-Axis Threshold</h4>
@@ -522,16 +506,14 @@
                                         <option value="percentile">Percentile</option>
                                     </select>
                                 </div>
-                                <input type="text" id="yThreshold" placeholder="Enter threshold value">
+                                <input type="number" id="yThreshold" step="any" placeholder="Enter threshold value">
                             </div>
                         </div>
                         <div class="threshold-note">
                             <strong>Threshold Types:</strong><br>
                             • <strong>Fixed Value:</strong> Use a specific number<br>
                             • <strong>Median/Mean:</strong> Automatically calculated from data<br>
-                            • <strong>Percentile:</strong> Enter percentile value (e.g., 75 for 75th percentile)<br>
-                            • <strong>Boolean:</strong> true/false values treated as 1/0<br>
-                            • <strong>Categorical:</strong> Enter specific category value
+                            • <strong>Percentile:</strong> Enter percentile value (e.g., 75 for 75th percentile)
                         </div>
                     </div>
                 </div>
@@ -547,30 +529,30 @@
                     <div class="matrix-title" id="matrixTitle"></div>
                     <div class="matrix-grid">
                         <div class="matrix-label corner"></div>
-                        <div class="matrix-label" id="topLabel">Weak X</div>
-                        <div class="matrix-label" id="topLabel2">Strong X</div>
-                        <div class="matrix-label y-axis" id="leftLabelTop">Strong Y</div>
+                        <div class="matrix-label" id="topLabel">Low X</div>
+                        <div class="matrix-label" id="topLabel2">High X</div>
+                        <div class="matrix-label y-axis" id="leftLabelTop">High Y</div>
                         <div class="quadrant" id="q2">
-                            <div class="quadrant-header" id="q2Header"></div>
+                            <div class="quadrant-header" id="q2Header">Q2: Low X, High Y</div>
                             <div class="quadrant-content" id="q2Content"></div>
                         </div>
                         <div class="quadrant" id="q1">
-                            <div class="quadrant-header" id="q1Header"></div>
+                            <div class="quadrant-header" id="q1Header">Q1: High X, High Y</div>
                             <div class="quadrant-content" id="q1Content"></div>
                         </div>
-                        <div class="matrix-label y-axis" id="leftLabelBottom">Weak Y</div>
+                        <div class="matrix-label y-axis" id="leftLabelBottom">Low Y</div>
                         <div class="quadrant" id="q3">
-                            <div class="quadrant-header" id="q3Header"></div>
+                            <div class="quadrant-header" id="q3Header">Q3: Low X, Low Y</div>
                             <div class="quadrant-content" id="q3Content"></div>
                         </div>
                         <div class="quadrant" id="q4">
-                            <div class="quadrant-header" id="q4Header"></div>
+                            <div class="quadrant-header" id="q4Header">Q4: High X, Low Y</div>
                             <div class="quadrant-content" id="q4Content"></div>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 20px; color: #64748b;">
-                        <strong>X-Axis:</strong> <span id="xAxisInfo">Weak (left) ← Threshold → Strong (right)</span> | 
-                        <strong>Y-Axis:</strong> <span id="yAxisInfo">Weak (bottom) ← Threshold → Strong (top)</span>
+                        <strong>X-Axis:</strong> <span id="xAxisInfo">Low (left) ← Threshold → High (right)</span> | 
+                        <strong>Y-Axis:</strong> <span id="yAxisInfo">Low (bottom) ← Threshold → High (top)</span>
                     </div>
                 </div>
 
@@ -578,8 +560,6 @@
             </div>
         </div>
     </div>
-
-    <div class="tooltip" id="tooltip"></div>
 
     <script>
         let currentData = [];
@@ -634,13 +614,7 @@
                 typeof val === 'number' && !isNaN(val)
             );
             
-            // Check if all values are boolean
-            const booleanValues = values.filter(val => 
-                typeof val === 'boolean' || val === 'true' || val === 'false' || 
-                val === 1 || val === 0 || val === '1' || val === '0'
-            );
-
-            // Determine type
+            // Determine type - only numeric columns are supported now
             if (numericValues.length === values.length) {
                 const stats = {
                     min: Math.min(...numericValues),
@@ -649,12 +623,8 @@
                     median: calculateMedian(numericValues)
                 };
                 return { type: 'numeric', values: numericValues, stats };
-            } else if (booleanValues.length === values.length) {
-                return { type: 'boolean', values: values };
             } else {
-                // Categorical
-                const uniqueValues = [...new Set(values)];
-                return { type: 'categorical', values: values, uniqueValues };
+                return { type: 'non-numeric', values: values };
             }
         }
 
@@ -704,15 +674,20 @@
                 columnStats[col] = analyzeColumnType(col, currentData);
             });
 
-            // Get analyzable columns (numeric, boolean, or categorical)
-            const analyzableColumns = columns.filter(col => 
-                columnStats[col].type !== 'empty'
+            // Get only numeric columns
+            const numericColumns = columns.filter(col => 
+                columnStats[col].type === 'numeric'
             );
+
+            if (numericColumns.length < 2) {
+                showError('At least 2 numeric columns are required for matrix analysis.');
+                return;
+            }
 
             // Update UI
             document.getElementById('dataInfo').style.display = 'block';
             document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows)`;
-            document.getElementById('columnInfo').textContent = `Total columns: ${columns.length}, Analyzable: ${analyzableColumns.length}`;
+            document.getElementById('columnInfo').textContent = `Total columns: ${columns.length}, Numeric: ${numericColumns.length}`;
             
             const typeBreakdown = {};
             Object.values(columnStats).forEach(stat => {
@@ -721,17 +696,16 @@
             document.getElementById('dataTypeInfo').textContent = 
                 `Types: ${Object.entries(typeBreakdown).map(([type, count]) => `${type}: ${count}`).join(', ')}`;
 
-            // Populate column selectors
+            // Populate column selectors with only numeric columns
             const xSelect = document.getElementById('xColumn');
             const ySelect = document.getElementById('yColumn');
             
             xSelect.innerHTML = '<option value="">Select column...</option>';
             ySelect.innerHTML = '<option value="">Select column...</option>';
             
-            analyzableColumns.forEach(col => {
-                const type = columnStats[col].type;
-                xSelect.innerHTML += `<option value="${col}">${col} (${type})</option>`;
-                ySelect.innerHTML += `<option value="${col}">${col} (${type})</option>`;
+            numericColumns.forEach(col => {
+                xSelect.innerHTML += `<option value="${col}">${col} (numeric)</option>`;
+                ySelect.innerHTML += `<option value="${col}">${col} (numeric)</option>`;
             });
 
             document.getElementById('analysisSection').style.display = 'block';
@@ -759,11 +733,6 @@
 
             if (stats.type === 'numeric') {
                 infoText += ` | Range: ${stats.stats.min.toFixed(2)} - ${stats.stats.max.toFixed(2)} | Mean: ${stats.stats.mean.toFixed(2)} | Median: ${stats.stats.median.toFixed(2)}`;
-            } else if (stats.type === 'categorical') {
-                infoText += ` | Unique values: ${stats.uniqueValues.length} | Examples: ${stats.uniqueValues.slice(0, 3).join(', ')}`;
-            } else if (stats.type === 'boolean') {
-                const trueCount = stats.values.filter(v => v === true || v === 'true' || v === 1 || v === '1').length;
-                infoText += ` | True: ${trueCount}, False: ${stats.values.length - trueCount}`;
             }
 
             infoDiv.textContent = infoText;
@@ -799,47 +768,64 @@
         function calculateThreshold(column, type, inputValue) {
             const stats = columnStats[column];
             
-            switch (type) {
-                case 'median':
-                    if (stats.type === 'numeric') return stats.stats.median;
-                    break;
-                case 'mean':
-                    if (stats.type === 'numeric') return stats.stats.mean;
-                    break;
-                case 'percentile':
-                    if (stats.type === 'numeric') {
-                        const percentile = parseFloat(inputValue);
-                        if (isNaN(percentile) || percentile < 0 || percentile > 100) {
-                            throw new Error('Percentile must be between 0 and 100');
-                        }
-                        return calculatePercentile(stats.values, percentile);
-                    }
-                    break;
-                case 'value':
-                default:
-                    if (stats.type === 'numeric') {
-                        const val = parseFloat(inputValue);
-                        if (isNaN(val)) throw new Error('Invalid numeric value');
-                        return val;
-                    } else if (stats.type === 'boolean') {
-                        if (inputValue === 'true' || inputValue === '1' || inputValue === 1) return 1;
-                        if (inputValue === 'false' || inputValue === '0' || inputValue === 0) return 0;
-                        throw new Error('Boolean threshold must be true/false or 1/0');
-                    } else if (stats.type === 'categorical') {
-                        return inputValue;
-                    }
-                    break;
+            if (stats.type !== 'numeric') {
+                throw new Error('Only numeric columns are supported');
             }
             
-            throw new Error(`Invalid threshold type ${type} for column type ${stats.type}`);
+            switch (type) {
+                case 'median':
+                    return stats.stats.median;
+                case 'mean':
+                    return stats.stats.mean;
+                case 'percentile':
+                    const percentile = parseFloat(inputValue);
+                    if (isNaN(percentile) || percentile < 0 || percentile > 100) {
+                        throw new Error('Percentile must be between 0 and 100');
+                    }
+                    return calculatePercentile(stats.values, percentile);
+                case 'value':
+                default:
+                    const val = parseFloat(inputValue);
+                    if (isNaN(val)) throw new Error('Invalid numeric value');
+                    return val;
+            }
         }
 
         function generateMatrix() {
-            const
+            try {
+                const xColumn = document.getElementById('xColumn').value;
+                const yColumn = document.getElementById('yColumn').value;
+                const xThresholdType = document.getElementById('xThresholdType').value;
+                const yThresholdType = document.getElementById('yThresholdType').value;
+                const xThresholdInput = document.getElementById('xThreshold').value;
+                const yThresholdInput = document.getElementById('yThreshold').value;
 
-        function showError(message) {
-            const errorBox = document.getElementById('errorMessage');
-            errorBox.textContent = message;
-            errorBox.style.display = 'block';
-        }
+                if (!xColumn || !yColumn) {
+                    showError('Please select both X and Y columns.');
+                    return;
+                }
 
+                if (xColumn === yColumn) {
+                    showError('X and Y columns must be different.');
+                    return;
+                }
+
+                // Calculate thresholds
+                const xThreshold = calculateThreshold(xColumn, xThresholdType, xThresholdInput);
+                const yThreshold = calculateThreshold(yColumn, yThresholdType, yThresholdInput);
+
+                // Categorize data points into quadrants
+                const quadrants = { q1: [], q2: [], q3: [], q4: [] };
+                
+                currentData.forEach((row, index) => {
+                    const xValue = parseFloat(row[xColumn]);
+                    const yValue = parseFloat(row[yColumn]);
+                    
+                    if (isNaN(xValue) || isNaN(yValue)) return;
+                    
+                    const dataPoint = { index, xValue, yValue, row };
+                    
+                    if (xValue >= xThreshold && yValue >= yThreshold) {
+                        quadrants.q1.push(dataPoint); // High X, High Y
+                    } else if (xValue < xThreshold && yValue >= yThreshold) {
+                        quadrants.q2.push(dataPoint); // Low X,
