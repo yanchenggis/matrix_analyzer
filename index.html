@@ -598,12 +598,13 @@
             }
 
             const columns = Object.keys(currentData[0]);
-                const numericColumns = columns.filter(col => {
-                    return currentData.some(row => {
-                        const value = row[col];
-                        return typeof value === 'number' && !isNaN(value);
-                    });
+
+            const numericColumns = columns.filter(col => {
+                return currentData.every(row => {
+                    const value = row[col];
+                    return typeof value === 'number' && !isNaN(value);
                 });
+            });
 
             // Update UI
             document.getElementById('dataInfo').style.display = 'block';
