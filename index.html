@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Planning Matrix Analyzer</title>
+    <title>Universal Matrix Analyzer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shp/0.3.2/shp.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -116,29 +115,6 @@
             font-size: 0.9rem;
         }
 
-        .url-input {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .url-input input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #bfdbfe;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .url-input button {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
         .controls {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -213,11 +189,16 @@
         .threshold-note {
             background: #dbeafe;
             border: 1px solid #bfdbfe;
-            padding: 12px;
+            padding: 15px;
             border-radius: 8px;
-            margin-top: 10px;
-            font-size: 0.9rem;
+            margin-top: 15px;
+            font-size: 0.95rem;
             color: #1e40af;
+            line-height: 1.5;
+        }
+
+        .threshold-note strong {
+            color: #1e3a8a;
         }
 
         .btn {
@@ -398,20 +379,6 @@
         .stat-card.q3 { border-left-color: #ef4444; }
         .stat-card.q4 { border-left-color: #8b5cf6; }
 
-        .export-section {
-            margin-top: 30px;
-            text-align: center;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .export-btn {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            margin: 0;
-        }
-
         .data-info {
             background: #dbeafe;
             border: 1px solid #bfdbfe;
@@ -448,34 +415,24 @@
                 grid-template-rows: 80px 1fr 1fr;
                 min-height: 500px;
             }
-
-            .export-section {
-                flex-direction: column;
-                align-items: center;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Urban Planning Matrix Analyzer</h1>
-            <p>True matrix visualization for spatial analysis and intervention planning</p>
+            <h1>Universal Matrix Analyzer</h1>
+            <p>Visualize relationships between any two variables with customizable thresholds</p>
         </div>
 
         <div class="content">
             <div class="section">
                 <h2>Data Upload</h2>
                 <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                    <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.json,.geojson,.kml,.zip" />
+                    <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" />
                     <div class="file-upload-icon">📁</div>
                     <div class="file-upload-text">Click to upload your data file</div>
-                    <div class="file-upload-hint">Supports CSV, Excel, JSON, GeoJSON, KML, Shapefile (ZIP)</div>
-                </div>
-                
-                <div class="url-input">
-                    <input type="url" id="urlInput" placeholder="Or enter URL to fetch data from web..." />
-                    <button onclick="loadFromUrl()">Load URL</button>
+                    <div class="file-upload-hint">Supports CSV and Excel formats</div>
                 </div>
                 
                 <div id="dataInfo" class="data-info" style="display: none;">
@@ -509,15 +466,18 @@
                         <div class="threshold-inputs">
                             <div class="threshold-group">
                                 <h4>X-Axis Threshold</h4>
-                                <input type="number" id="xThreshold" placeholder="Weak/Strong threshold" step="0.1">
+                                <input type="number" id="xThreshold" placeholder="Enter threshold value" step="0.1">
                             </div>
                             <div class="threshold-group">
                                 <h4>Y-Axis Threshold</h4>
-                                <input type="number" id="yThreshold" placeholder="Weak/Strong threshold" step="0.1">
+                                <input type="number" id="yThreshold" placeholder="Enter threshold value" step="0.1">
                             </div>
                         </div>
                         <div class="threshold-note">
-                            <strong>Note:</strong> Values equal to or above threshold = Strong, below threshold = Weak
+                            <strong>How thresholds work:</strong><br>
+                            • Values <strong>≥ threshold</strong> = <strong>Strong</strong> (right/top quadrants)<br>
+                            • Values <strong>&lt; threshold</strong> = <strong>Weak</strong> (left/bottom quadrants)<br>
+                            Set thresholds based on your domain knowledge or desired cutoff points.
                         </div>
                     </div>
                 </div>
@@ -557,12 +517,6 @@
                 </div>
 
                 <div class="stats-grid" id="statsGrid"></div>
-
-                <div class="export-section">
-                    <button class="btn export-btn" onclick="exportMatrix()">Export Matrix as PNG</button>
-                    <button class="btn export-btn" onclick="exportData()">Export Matrix Data</button>
-                    <button class="btn export-btn" onclick="exportSummary()">Export Summary Report</button>
-                </div>
             </div>
         </div>
     </div>
@@ -588,149 +542,96 @@
                     data = await parseCSV(file);
                 } else if (fileExtension === 'xlsx' || fileExtension === 'xls') {
                     data = await parseExcel(file);
-                } else if (fileExtension === 'json') {
-                    data = await parseJSON(file);
-                } else if (fileExtension === 'geojson') {
-                    data = await parseGeoJSON(file);
-                } else if (fileExtension === 'kml') {
-                    data = await parseKML(file);
-                } else if (fileExtension === 'zip') {
-                    data = await parseShapefile(file);
                 } else {
-                    alert('Unsupported file format');
+                    alert('Please upload a CSV or Excel file');
                     return;
                 }
                 
                 processData(data, fileName);
             } catch (error) {
                 console.error('Error processing file:', error);
-                alert('Error processing file: ' + error.message);
-            }
-        }
-
-        async function loadFromUrl() {
-            const url = document.getElementById('urlInput').value.trim();
-            if (!url) {
-                alert('Please enter a URL');
-                return;
-            }
-
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-                
-                let data;
-                if (url.includes('.json') || url.includes('geojson')) {
-                    data = JSON.parse(text);
-                    if (data.features) {
-                        data = parseGeoJSONFeatures(data);
-                    }
-                } else {
-                    data = Papa.parse(text, { header: true, dynamicTyping: true, skipEmptyLines: true }).data;
-                }
-                
-                processData(data, 'URL Data');
-            } catch (error) {
-                console.error('Error loading URL:', error);
-                alert('Error loading URL: ' + error.message);
+                alert('Error processing file. Please check your file format and try again.');
             }
         }
 
         function parseCSV(file) {
             return new Promise((resolve, reject) => {
                 Papa.parse(file, {
-                    complete: (results) => resolve(results.data),
+                    complete: (results) => {
+                        if (results.errors.length > 0) {
+                            console.warn('CSV parsing warnings:', results.errors);
+                        }
+                        resolve(results.data);
+                    },
                     error: reject,
                     header: true,
                     dynamicTyping: true,
-                    skipEmptyLines: true
+                    skipEmptyLines: true,
+                    trimHeaders: true
                 });
             });
         }
 
         async function parseExcel(file) {
-            const data = await file.arrayBuffer();
-            const workbook = XLSX.read(data, {type: 'array'});
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            return XLSX.utils.sheet_to_json(worksheet, {defval: ''});
-        }
-
-        async function parseJSON(file) {
-            const text = await file.text();
-            return JSON.parse(text);
-        }
-
-        async function parseGeoJSON(file) {
-            const text = await file.text();
-            const geojson = JSON.parse(text);
-            return parseGeoJSONFeatures(geojson);
-        }
-
-        function parseGeoJSONFeatures(geojson) {
-            return geojson.features.map(feature => ({
-                ...feature.properties,
-                geometry_type: feature.geometry.type,
-                coordinates: JSON.stringify(feature.geometry.coordinates)
-            }));
-        }
-
-        async function parseKML(file) {
-            const text = await file.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(text, 'application/xml');
-            const placemarks = doc.querySelectorAll('Placemark');
-            
-            return Array.from(placemarks).map(placemark => {
-                const name = placemark.querySelector('name')?.textContent || '';
-                const description = placemark.querySelector('description')?.textContent || '';
-                const data = { name, description };
-                
-                const extendedData = placemark.querySelectorAll('ExtendedData Data');
-                extendedData.forEach(dataEl => {
-                    const key = dataEl.getAttribute('name');
-                    const value = dataEl.querySelector('value')?.textContent || '';
-                    data[key] = isNaN(value) ? value : parseFloat(value);
+            try {
+                const data = await file.arrayBuffer();
+                const workbook = XLSX.read(data, {type: 'array'});
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+                    defval: '',
+                    blankrows: false
                 });
-                
-                return data;
-            });
-        }
-
-        async function parseShapefile(file) {
-            const buffer = await file.arrayBuffer();
-            const geojson = await shp(buffer);
-            return parseGeoJSONFeatures(geojson);
+                return jsonData;
+            } catch (error) {
+                throw new Error('Failed to parse Excel file: ' + error.message);
+            }
         }
 
         function processData(data, fileName) {
             if (!data || data.length === 0) {
-                alert('No data found in the file.');
+                alert('No data found in the file. Please check your file format.');
                 return;
             }
 
+            // Filter out completely empty rows
             currentData = data.filter(row => {
-                return Object.values(row).some(value => 
-                    value !== null && value !== undefined && value !== ''
+                return row && Object.values(row).some(value => 
+                    value !== null && value !== undefined && value !== '' && value !== 0
                 );
             });
 
             if (currentData.length === 0) {
-                alert('No valid data rows found.');
+                alert('No valid data rows found. Please check your data.');
                 return;
             }
 
-            const columns = Object.keys(currentData[0]);
-            const numericColumns = columns.filter(col => {
-                return currentData.some(row => {
+            // Get all column names
+            const allColumns = Object.keys(currentData[0]);
+            
+            // Find numeric columns by checking if values can be converted to numbers
+            const numericColumns = allColumns.filter(col => {
+                const numericCount = currentData.reduce((count, row) => {
                     const value = row[col];
-                    return !isNaN(value) && value !== null && value !== '';
-                });
+                    const numValue = parseFloat(value);
+                    return !isNaN(numValue) && isFinite(numValue) ? count + 1 : count;
+                }, 0);
+                
+                // Consider a column numeric if at least 70% of values are numeric
+                return numericCount >= (currentData.length * 0.7);
             });
 
-            document.getElementById('dataInfo').style.display = 'block';
-            document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows)`;
-            document.getElementById('columnInfo').textContent = `Numeric columns: ${numericColumns.join(', ')}`;
+            if (numericColumns.length < 2) {
+                alert('Need at least 2 numeric columns for matrix analysis. Found: ' + numericColumns.length);
+                return;
+            }
 
+            // Update UI
+            document.getElementById('dataInfo').style.display = 'block';
+            document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows, ${allColumns.length} columns)`;
+            document.getElementById('columnInfo').textContent = `Numeric columns available: ${numericColumns.join(', ')}`;
+
+            // Populate column selectors
             const xSelect = document.getElementById('xColumn');
             const ySelect = document.getElementById('yColumn');
             
@@ -742,6 +643,7 @@
                 ySelect.innerHTML += `<option value="${col}">${col}</option>`;
             });
 
+            // Show analysis section
             document.getElementById('analysisSection').style.display = 'block';
         }
 
@@ -756,22 +658,29 @@
                 return;
             }
 
-            if (isNaN(xThreshold) || isNaN(yThreshold)) {
-                alert('Please enter valid threshold values.');
+            if (xColumn === yColumn) {
+                alert('Please select different columns for X and Y axes.');
                 return;
             }
 
+            if (isNaN(xThreshold) || isNaN(yThreshold)) {
+                alert('Please enter valid threshold values for both axes.');
+                return;
+            }
+
+            // Filter and validate data
             const validData = currentData.filter(row => {
                 const xVal = parseFloat(row[xColumn]);
                 const yVal = parseFloat(row[yColumn]);
-                return !isNaN(xVal) && !isNaN(yVal);
+                return !isNaN(xVal) && !isNaN(yVal) && isFinite(xVal) && isFinite(yVal);
             });
 
             if (validData.length === 0) {
-                alert('No valid data points found for the selected columns.');
+                alert('No valid numeric data points found for the selected columns.');
                 return;
             }
 
+            // Get value ranges for positioning
             const xValues = validData.map(row => parseFloat(row[xColumn]));
             const yValues = validData.map(row => parseFloat(row[yColumn]));
             const xMin = Math.min(...xValues);
@@ -779,11 +688,12 @@
             const yMin = Math.min(...yValues);
             const yMax = Math.max(...yValues);
 
+            // Categorize data into quadrants based on thresholds
             const quadrants = {
-                q1: [], // Strong X, Strong Y
-                q2: [], // Weak X, Strong Y  
-                q3: [], // Weak X, Weak Y
-                q4: []  // Strong X, Weak Y
+                q1: [], // Strong X (≥ threshold), Strong Y (≥ threshold)
+                q2: [], // Weak X (< threshold), Strong Y (≥ threshold)  
+                q3: [], // Weak X (< threshold), Weak Y (< threshold)
+                q4: []  // Strong X (≥ threshold), Weak Y (< threshold)
             };
 
             validData.forEach(row => {
@@ -811,34 +721,38 @@
                 xMin, xMax, yMin, yMax
             };
 
-            createTrueMatrix();
+            createMatrix();
             updateStats();
             document.getElementById('resultsSection').style.display = 'block';
         }
 
-        function createTrueMatrix() {
+        function createMatrix() {
+            // Update matrix title and labels
             document.getElementById('matrixTitle').textContent = 
-                `${matrixResults.yColumn} vs ${matrixResults.xColumn} Matrix`;
+                `${matrixResults.yColumn} vs ${matrixResults.xColumn} Matrix Analysis`;
             
-            document.getElementById('topLabel').textContent = `Strong ${matrixResults.yColumn}`;
-            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.yColumn}`;
-            document.getElementById('leftLabel').textContent = `Weak ${matrixResults.xColumn}`;
-            document.getElementById('rightLabel').textContent = `Strong ${matrixResults.xColumn}`;
+            document.getElementById('topLabel').textContent = `Strong ${matrixResults.yColumn} (≥${matrixResults.yThreshold})`;
+            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.yColumn} (≥${matrixResults.yThreshold})`;
+            document.getElementById('leftLabel').textContent = `Weak ${matrixResults.xColumn} (<${matrixResults.xThreshold})`;
+            document.getElementById('rightLabel').textContent = `Strong ${matrixResults.xColumn} (≥${matrixResults.xThreshold})`;
 
+            // Update quadrant headers
             document.getElementById('q1Header').textContent = 
-                `Strong ${matrixResults.xColumn} + Strong ${matrixResults.yColumn}`;
+                `Strong ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q1.length} points)`;
             document.getElementById('q2Header').textContent = 
-                `Weak ${matrixResults.xColumn} + Strong ${matrixResults.yColumn}`;
+                `Weak ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q2.length} points)`;
             document.getElementById('q3Header').textContent = 
-                `Weak ${matrixResults.xColumn} + Weak ${matrixResults.yColumn}`;
+                `Weak ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q3.length} points)`;
             document.getElementById('q4Header').textContent = 
-                `Strong ${matrixResults.xColumn} + Weak ${matrixResults.yColumn}`;
+                `Strong ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q4.length} points)`;
 
+            // Clear existing content
             ['q1', 'q2', 'q3', 'q4'].forEach(quadrant => {
                 const content = document.getElementById(quadrant + 'Content');
                 content.innerHTML = '';
             });
 
+            // Add data points to each quadrant
             Object.keys(matrixResults.quadrants).forEach(quadrant => {
                 const points = matrixResults.quadrants[quadrant];
                 const container = document.getElementById(quadrant + 'Content');
@@ -847,11 +761,71 @@
                     const dot = document.createElement('div');
                     dot.className = `data-point ${quadrant}`;
                     
-                    let xPos, yPos;
+                    // Calculate position within quadrant (simplified approach)
+                    const xPos = 20 + (index * 25) % 200; // Simple scattered positioning
+                    const yPos = 30 + Math.floor((index * 25) / 200) * 30;
                     
-                    if (quadrant === 'q1') {
-                        const xRange = matrixResults.xMax - matrixResults.xThreshold;
-                        const yRange = matrixResults.yMax - matrixResults.yThreshold;
-                        xPos = xRange > 0 ? ((point.xVal - matrixResults.xThreshold) / xRange) * 80 + 10 : 50;
-                        yPos = yRange > 0 ? (1 - (point.yVal - matrixResults.yThreshold) / yRange) * 80 + 10 : 50;
-                    } else if (quadrant === 'q2') {
+                    dot.style.left = `${Math.min(xPos, 90)}%`;
+                    dot.style.top = `${Math.min(yPos, 80)}%`;
+                    
+                    // Add tooltip on hover
+                    const tooltip = document.getElementById('tooltip');
+                    dot.addEventListener('mouseenter', (e) => {
+                        const rect = e.target.getBoundingClientRect();
+                        tooltip.style.display = 'block';
+                        tooltip.style.left = (rect.left + window.scrollX + 20) + 'px';
+                        tooltip.style.top = (rect.top + window.scrollY - 10) + 'px';
+                        tooltip.innerHTML = `${matrixResults.xColumn}: ${point.xVal}<br>${matrixResults.yColumn}: ${point.yVal}`;
+                    });
+                    
+                    dot.addEventListener('mouseleave', () => {
+                        tooltip.style.display = 'none';
+                    });
+                    
+                    container.appendChild(dot);
+                });
+            });
+        }
+
+        function updateStats() {
+            const statsGrid = document.getElementById('statsGrid');
+            const total = matrixResults.totalPoints;
+            
+            const stats = [
+                {
+                    id: 'q1',
+                    title: 'Strong-Strong',
+                    count: matrixResults.quadrants.q1.length,
+                    color: '#3b82f6'
+                },
+                {
+                    id: 'q2',
+                    title: 'Weak-Strong',
+                    count: matrixResults.quadrants.q2.length,
+                    color: '#f59e0b'
+                },
+                {
+                    id: 'q3',
+                    title: 'Weak-Weak',
+                    count: matrixResults.quadrants.q3.length,
+                    color: '#ef4444'
+                },
+                {
+                    id: 'q4',
+                    title: 'Strong-Weak',
+                    count: matrixResults.quadrants.q4.length,
+                    color: '#8b5cf6'
+                }
+            ];
+            
+            statsGrid.innerHTML = stats.map(stat => `
+                <div class="stat-card ${stat.id}">
+                    <h4>${stat.title}</h4>
+                    <div class="count" style="color: ${stat.color}">${stat.count}</div>
+                    <div class="percentage">${((stat.count / total) * 100).toFixed(1)}%</div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
