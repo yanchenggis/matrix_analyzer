@@ -307,34 +307,6 @@
             overflow-y: auto;
         }
 
-        .threshold-lines {
-            position: absolute;
-            top: 45px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .threshold-line-x {
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #11998e;
-            opacity: 0.5;
-        }
-
-        .threshold-line-y {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #11998e;
-            opacity: 0.5;
-        }
-
         .data-point {
             position: absolute;
             width: 20px;
@@ -431,6 +403,15 @@
             margin: 5px 0;
         }
 
+        .error-message {
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
         @media (max-width: 768px) {
             .controls {
                 grid-template-columns: 1fr;
@@ -474,6 +455,8 @@
                     <p id="fileInfo"></p>
                     <p id="columnInfo"></p>
                 </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
             </div>
 
             <div class="section" id="analysisSection" style="display: none;">
@@ -567,13 +550,27 @@
     
         document.getElementById('fileInput').addEventListener('change', handleFile);
     
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
         async function handleFile(event) {
             const file = event.target.files[0];
             if (!file) return;
-    
+
+            hideError();
             const fileName = file.name;
             const fileExtension = fileName.split('.').pop().toLowerCase();
-    
+
             try {
                 let data;
                 if (fileExtension === 'csv') {
@@ -581,14 +578,14 @@
                 } else if (fileExtension === 'xlsx' || fileExtension === 'xls') {
                     data = await parseExcel(file);
                 } else {
-                    alert('Please upload a CSV or Excel file');
+                    showError('Please upload a CSV or Excel file');
                     return;
                 }
-    
+
                 processData(data, fileName);
             } catch (error) {
                 console.error('Error processing file:', error);
-                alert('Error processing file. Please check your file format and try again.');
+                showError('Error processing file: ' + error.message);
             }
         }
     
@@ -605,7 +602,9 @@
                     header: true,
                     dynamicTyping: true,
                     skipEmptyLines: true,
-                    trimHeaders: true
+                    transformHeader: function(h) {
+                        return h.trim();
+                    }
                 });
             });
         }
@@ -628,50 +627,65 @@
     
         function processData(data, fileName) {
             if (!data || data.length === 0) {
-                alert('No data found in the file. Please check your file format.');
+                showError('No data found in the file. Please check your file format.');
                 return;
             }
-    
-            // Accept 0 as valid value now
+
+            // Filter out completely empty rows
             currentData = data.filter(row => {
-                return row && Object.values(row).some(value =>
+                if (!row || typeof row !== 'object') return false;
+                return Object.values(row).some(value =>
                     value !== null && value !== undefined && value !== ''
                 );
             });
-    
+
             if (currentData.length === 0) {
-                alert('No valid rows found. Please ensure your file contains numeric values and headers.');
+                showError('No valid rows found. Please ensure your file contains data.');
                 return;
             }
-    
+
             const allColumns = Object.keys(currentData[0]);
-    
-            const numericColumns = allColumns.filter(col => {
-                const values = currentData.map(row => parseFloat(row[col]));
-                const numericCount = values.filter(val => !isNaN(val) && isFinite(val)).length;
-                return numericCount >= Math.floor(currentData.length * 0.7);
-            });
-    
-            if (numericColumns.length < 2) {
-                alert('Need at least 2 numeric columns for matrix analysis. Found: ' + numericColumns.length);
+            if (allColumns.length === 0) {
+                showError('No columns found in the data.');
                 return;
             }
-    
+
+            // Find numeric columns - be more permissive
+            const numericColumns = allColumns.filter(col => {
+                const values = currentData.map(row => {
+                    const val = row[col];
+                    if (val === null || val === undefined || val === '') return NaN;
+                    return parseFloat(val);
+                });
+                
+                const validNumericValues = values.filter(val => !isNaN(val) && isFinite(val));
+                const numericRatio = validNumericValues.length / currentData.length;
+                
+                // Require at least 50% of values to be numeric
+                return numericRatio >= 0.5 && validNumericValues.length >= 2;
+            });
+
+            if (numericColumns.length < 2) {
+                showError(`Need at least 2 numeric columns for matrix analysis. Found ${numericColumns.length} numeric columns: ${numericColumns.join(', ')}`);
+                return;
+            }
+
+            // Update UI
             document.getElementById('dataInfo').style.display = 'block';
             document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows, ${allColumns.length} columns)`;
             document.getElementById('columnInfo').textContent = `Numeric columns available: ${numericColumns.join(', ')}`;
-    
+
             const xSelect = document.getElementById('xColumn');
             const ySelect = document.getElementById('yColumn');
-    
+
             xSelect.innerHTML = '<option value="">Select column...</option>';
             ySelect.innerHTML = '<option value="">Select column...</option>';
-    
+
             numericColumns.forEach(col => {
                 xSelect.innerHTML += `<option value="${col}">${col}</option>`;
                 ySelect.innerHTML += `<option value="${col}">${col}</option>`;
             });
-    
+
             document.getElementById('analysisSection').style.display = 'block';
         }
 
@@ -682,17 +696,17 @@
             const yThreshold = parseFloat(document.getElementById('yThreshold').value);
 
             if (!xColumn || !yColumn) {
-                alert('Please select both X and Y columns.');
+                showError('Please select both X and Y columns.');
                 return;
             }
 
             if (xColumn === yColumn) {
-                alert('Please select different columns for X and Y axes.');
+                showError('Please select different columns for X and Y axes.');
                 return;
             }
 
             if (isNaN(xThreshold) || isNaN(yThreshold)) {
-                alert('Please enter valid threshold values for both axes.');
+                showError('Please enter valid threshold values for both axes.');
                 return;
             }
 
@@ -704,7 +718,7 @@
             });
 
             if (validData.length === 0) {
-                alert('No valid numeric data points found for the selected columns.');
+                showError('No valid numeric data points found for the selected columns.');
                 return;
             }
 
@@ -794,13 +808,23 @@
                     let xPos, yPos;
                     
                     if (quadrant === 'q1') { // Top Right - Strong X, Strong Y
-                        xPos = ((point.xVal - matrixResults.xThreshold) / (matrixResults.xMax - matrixResults.xThreshold)) * 80 + 10;
-                        yPos = 90 - ((point.yVal - matrixResults.yThreshold) / (matrixResults.yMax - matrixResults.yThreshold)) * 80;
+                        const xRange = matrixResults.xMax - matrixResults.xThreshold;
+                        const yRange = matrixResults.yMax - matrixResults.yThreshold;
+                        
+                        if (xRange > 0) {
+                            xPos = ((point.xVal - matrixResults.xThreshold) / xRange) * 80 + 10;
+                        } else {
+                            xPos = 50; // Center if no range
+                        }
+                        
+                        if (yRange > 0) {
+                            yPos = 90 - ((point.yVal - matrixResults.yThreshold) / yRange) * 80;
+                        } else {
+                            yPos = 50; // Center if no range  
+                        }
+                        
                     } else if (quadrant === 'q2') { // Top Left - Weak X, Strong Y
-                        xPos = ((point.xVal - matrixResults.xMin) / (matrixResults.xThreshold - matrixResults.xMin)) * 80 + 10;
-                        yPos = 90 - ((point.yVal - matrixResults.yThreshold) / (matrixResults.yMax - matrixResults.yThreshold)) * 80;
-                    } else if (quadrant === 'q3') { // Bottom Left - Weak X, Weak Y
-                        xPos = ((point.xVal - matrixResults.xMin) / (matrixResults.xThreshold - matrixResults.xMin)) * 80 + 10;
-                        yPos = 90 - ((point.yVal - matrixResults.yMin) / (matrixResults.yThreshold - matrixResults.yMin)) * 80;
-                    } else { // q4 - Bottom Right - Strong X, Weak Y
-                        xPos = ((point.xVal - matrixResults.
+                        const xRange = matrixResults.xThreshold - matrixResults.xMin;
+                        const yRange = matrixResults.yMax - matrixResults.yThreshold;
+                        
+                        if (
