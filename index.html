@@ -15,9 +15,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #334155;
         }
 
         .container {
@@ -25,13 +26,13 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+            background: linear-gradient(135deg, #64748b, #475569);
             color: white;
             padding: 30px;
             text-align: center;
@@ -56,13 +57,13 @@
             margin-bottom: 40px;
             padding: 30px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #d1d5db;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #64748b;
         }
 
         .section h2 {
-            color: #d1d5db;
+            color: #475569;
             margin-bottom: 20px;
             font-size: 1.5rem;
             display: flex;
@@ -80,17 +81,17 @@
             flex-direction: column;
             align-items: center;
             padding: 40px;
-            border: 3px dashed #d1d5db;
-            border-radius: 15px;
-            background: linear-gradient(45deg, #e8f5f4, #f0fdf8);
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #f8fafc, #f1f5f9);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .file-upload:hover {
-            border-color: #0d7c6e;
-            background: linear-gradient(45deg, #d6f2ef, #e8fdf2);
-            transform: translateY(-2px);
+            border-color: #64748b;
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            transform: translateY(-1px);
         }
 
         .file-upload input {
@@ -100,18 +101,18 @@
         .file-upload-icon {
             font-size: 3rem;
             margin-bottom: 15px;
-            color: #d1d5db;
+            color: #64748b;
         }
 
         .file-upload-text {
             font-size: 1.2rem;
-            color: #d1d5db;
+            color: #475569;
             margin-bottom: 5px;
             font-weight: 600;
         }
 
         .file-upload-hint {
-            color: #0d7c6e;
+            color: #64748b;
             font-size: 0.9rem;
         }
 
@@ -123,14 +124,14 @@
         }
 
         .control-group {
-            background: #e8f5f4;
+            background: #f8fafc;
             padding: 25px;
-            border-radius: 12px;
-            border: 2px solid #c7f2ed;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
 
         .control-group h3 {
-            color: #d1d5db;
+            color: #475569;
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
@@ -142,25 +143,25 @@
             align-items: center;
         }
 
-        select, input[type="number"] {
+        select, input[type="number"], input[type="text"] {
             flex: 1;
             padding: 12px 15px;
-            border: 2px solid #c7f2ed;
-            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
             font-size: 1rem;
             background: white;
             transition: border-color 0.3s ease;
         }
 
-        select:focus, input[type="number"]:focus {
+        select:focus, input[type="number"]:focus, input[type="text"]:focus {
             outline: none;
-            border-color: #d1d5db;
-            box-shadow: 0 0 0 3px rgba(17, 153, 142, 0.1);
+            border-color: #64748b;
+            box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
         }
 
         label {
             font-weight: 600;
-            color: #11998e;
+            color: #475569;
             min-width: 80px;
         }
 
@@ -174,53 +175,67 @@
         .threshold-group {
             background: white;
             padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #c7f2ed;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
         }
 
         .threshold-group h4 {
-            color: #0d7c6e;
+            color: #475569;
             font-size: 0.9rem;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
+        .threshold-type {
+            margin-bottom: 10px;
+        }
+
         .threshold-note {
-            background: #f0fdf8;
-            border: 1px solid #c7f2ed;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-top: 15px;
             font-size: 0.95rem;
-            color: #d1d5db;
+            color: #475569;
             line-height: 1.5;
         }
 
         .threshold-note strong {
-            color: #0d7c6e;
+            color: #334155;
+        }
+
+        .column-info {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #64748b;
         }
 
         .btn {
-            background: linear-gradient(135deg, #d1d5db, #38ef7d);
+            background: linear-gradient(135deg, #64748b, #475569);
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 10px;
+            border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+            box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
         }
 
         .btn:disabled {
-            background: #a7f3d0;
+            background: #94a3b8;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -229,15 +244,15 @@
         .matrix-container {
             margin-top: 30px;
             background: white;
-            border-radius: 15px;
+            border-radius: 8px;
             padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .matrix-title {
             text-align: center;
             margin-bottom: 30px;
-            color: #d1d5db;
+            color: #475569;
             font-size: 1.5rem;
             font-weight: bold;
         }
@@ -246,15 +261,15 @@
             display: grid;
             grid-template-columns: 100px 1fr 1fr;
             grid-template-rows: 100px 1fr 1fr;
-            gap: 2px;
-            background: #d1d5db;
-            border-radius: 12px;
+            gap: 1px;
+            background: #cbd5e1;
+            border-radius: 8px;
             overflow: hidden;
             min-height: 600px;
         }
 
         .matrix-label {
-            background: #0d7c6e;
+            background: #64748b;
             color: white;
             display: flex;
             align-items: center;
@@ -266,7 +281,7 @@
         }
 
         .matrix-label.corner {
-            background: #d1d5db;
+            background: #94a3b8;
         }
 
         .matrix-label.y-axis {
@@ -279,7 +294,6 @@
             position: relative;
             min-height: 250px;
             overflow: hidden;
-            border: 1px solid #e0e0e0;
         }
 
         .quadrant-header {
@@ -287,12 +301,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(17, 153, 142, 0.1);
+            background: #f8fafc;
             padding: 10px;
-            border-bottom: 1px solid #c7f2ed;
+            border-bottom: 1px solid #e2e8f0;
             font-size: 0.85rem;
             font-weight: bold;
-            color: #d1d5db;
+            color: #475569;
             text-align: center;
             z-index: 10;
         }
@@ -309,8 +323,8 @@
 
         .data-point {
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             border: 2px solid white;
             cursor: pointer;
@@ -319,7 +333,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: bold;
             color: white;
         }
@@ -329,8 +343,8 @@
             z-index: 15;
         }
 
-        .data-point.q1 { background: #10b981; }
-        .data-point.q2 { background: #facc15; }
+        .data-point.q1 { background: #22c55e; }
+        .data-point.q2 { background: #eab308; }
         .data-point.q3 { background: #ef4444; }
         .data-point.q4 { background: #3b82f6; }
 
@@ -357,16 +371,16 @@
         .stat-card {
             background: white;
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid;
             text-align: center;
         }
 
         .stat-card h4 {
             margin-bottom: 10px;
             font-size: 1rem;
-            color: #11998e;
+            color: #475569;
         }
 
         .stat-card .count {
@@ -376,30 +390,30 @@
         }
 
         .stat-card .percentage {
-            color: #0d7c6e;
+            color: #64748b;
             font-size: 0.9rem;
         }
 
-        .stat-card.q1 { border-left-color: #10b981; }
-        .stat-card.q2 { border-left-color: #facc15; }
+        .stat-card.q1 { border-left-color: #22c55e; }
+        .stat-card.q2 { border-left-color: #eab308; }
         .stat-card.q3 { border-left-color: #ef4444; }
         .stat-card.q4 { border-left-color: #3b82f6; }
 
         .data-info {
-            background: #f0fdf8;
-            border: 1px solid #c7f2ed;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 20px;
         }
 
         .data-info h4 {
-            color: #d1d5db;
+            color: #475569;
             margin-bottom: 8px;
         }
 
         .data-info p {
-            color: #0d7c6e;
+            color: #64748b;
             margin: 5px 0;
         }
 
@@ -408,7 +422,7 @@
             border: 1px solid #fecaca;
             color: #dc2626;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-top: 15px;
         }
 
@@ -437,7 +451,7 @@
     <div class="container">
         <div class="header">
             <h1>Universal Matrix Analyzer</h1>
-            <p>Visualize relationships between any two variables with customizable thresholds</p>
+            <p>Visualize relationships between any two variables with flexible threshold methods</p>
         </div>
 
         <div class="content">
@@ -454,6 +468,7 @@
                     <h4>Data Summary</h4>
                     <p id="fileInfo"></p>
                     <p id="columnInfo"></p>
+                    <p id="dataTypeInfo"></p>
                 </div>
                 
                 <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -470,12 +485,14 @@
                                 <option value="">Select column...</option>
                             </select>
                         </div>
+                        <div id="xColumnInfo" class="column-info" style="display: none;"></div>
                         <div class="form-row">
                             <label>Y-Axis:</label>
                             <select id="yColumn">
                                 <option value="">Select column...</option>
                             </select>
                         </div>
+                        <div id="yColumnInfo" class="column-info" style="display: none;"></div>
                     </div>
 
                     <div class="control-group">
@@ -483,18 +500,36 @@
                         <div class="threshold-inputs">
                             <div class="threshold-group">
                                 <h4>X-Axis Threshold</h4>
-                                <input type="number" id="xThreshold" placeholder="Enter threshold value" step="0.1">
+                                <div class="threshold-type">
+                                    <select id="xThresholdType">
+                                        <option value="value">Fixed Value</option>
+                                        <option value="median">Median</option>
+                                        <option value="mean">Mean</option>
+                                        <option value="percentile">Percentile</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="xThreshold" placeholder="Enter threshold value">
                             </div>
                             <div class="threshold-group">
                                 <h4>Y-Axis Threshold</h4>
-                                <input type="number" id="yThreshold" placeholder="Enter threshold value" step="0.1">
+                                <div class="threshold-type">
+                                    <select id="yThresholdType">
+                                        <option value="value">Fixed Value</option>
+                                        <option value="median">Median</option>
+                                        <option value="mean">Mean</option>
+                                        <option value="percentile">Percentile</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="yThreshold" placeholder="Enter threshold value">
                             </div>
                         </div>
                         <div class="threshold-note">
-                            <strong>How thresholds work:</strong><br>
-                            • Values <strong>≥ threshold</strong> = <strong>Strong</strong> (right/top quadrants)<br>
-                            • Values <strong>&lt; threshold</strong> = <strong>Weak</strong> (left/bottom quadrants)<br>
-                            Thresholds act as the center point - data is positioned relative to these values.
+                            <strong>Threshold Types:</strong><br>
+                            • <strong>Fixed Value:</strong> Use a specific number<br>
+                            • <strong>Median/Mean:</strong> Automatically calculated from data<br>
+                            • <strong>Percentile:</strong> Enter percentile value (e.g., 75 for 75th percentile)<br>
+                            • <strong>Boolean:</strong> true/false values treated as 1/0<br>
+                            • <strong>Categorical:</strong> Enter specific category value
                         </div>
                     </div>
                 </div>
@@ -531,9 +566,9 @@
                             <div class="quadrant-content" id="q4Content"></div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 20px; color: #11998e;">
-                        <strong>X-Axis:</strong> Weak (left) ← Threshold → Strong (right) | 
-                        <strong>Y-Axis:</strong> Weak (bottom) ← Threshold → Strong (top)
+                    <div style="text-align: center; margin-top: 20px; color: #64748b;">
+                        <strong>X-Axis:</strong> <span id="xAxisInfo">Weak (left) ← Threshold → Strong (right)</span> | 
+                        <strong>Y-Axis:</strong> <span id="yAxisInfo">Weak (bottom) ← Threshold → Strong (top)</span>
                     </div>
                 </div>
 
@@ -547,8 +582,13 @@
     <script>
         let currentData = [];
         let matrixResults = {};
+        let columnStats = {};
 
         document.getElementById('fileInput').addEventListener('change', handleFile);
+        document.getElementById('xColumn').addEventListener('change', updateColumnInfo);
+        document.getElementById('yColumn').addEventListener('change', updateColumnInfo);
+        document.getElementById('xThresholdType').addEventListener('change', updateThresholdInput);
+        document.getElementById('yThresholdType').addEventListener('change', updateThresholdInput);
 
         function handleFile(event) {
             const file = event.target.files[0];
@@ -580,9 +620,66 @@
             }
         }
 
+        function analyzeColumnType(columnName, data) {
+            const values = data.map(row => row[columnName]).filter(val => 
+                val !== null && val !== undefined && val !== ''
+            );
+            
+            if (values.length === 0) return { type: 'empty', values: [] };
+
+            // Check if all values are numbers (including integers and floats)
+            const numericValues = values.filter(val => 
+                typeof val === 'number' && !isNaN(val)
+            );
+            
+            // Check if all values are boolean
+            const booleanValues = values.filter(val => 
+                typeof val === 'boolean' || val === 'true' || val === 'false' || 
+                val === 1 || val === 0 || val === '1' || val === '0'
+            );
+
+            // Determine type
+            if (numericValues.length === values.length) {
+                const stats = {
+                    min: Math.min(...numericValues),
+                    max: Math.max(...numericValues),
+                    mean: numericValues.reduce((a, b) => a + b, 0) / numericValues.length,
+                    median: calculateMedian(numericValues)
+                };
+                return { type: 'numeric', values: numericValues, stats };
+            } else if (booleanValues.length === values.length) {
+                return { type: 'boolean', values: values };
+            } else {
+                // Categorical
+                const uniqueValues = [...new Set(values)];
+                return { type: 'categorical', values: values, uniqueValues };
+            }
+        }
+
+        function calculateMedian(arr) {
+            const sorted = [...arr].sort((a, b) => a - b);
+            const mid = Math.floor(sorted.length / 2);
+            return sorted.length % 2 === 0 
+                ? (sorted[mid - 1] + sorted[mid]) / 2 
+                : sorted[mid];
+        }
+
+        function calculatePercentile(arr, percentile) {
+            const sorted = [...arr].sort((a, b) => a - b);
+            const index = (percentile / 100) * (sorted.length - 1);
+            const lower = Math.floor(index);
+            const upper = Math.ceil(index);
+            
+            if (lower === upper) {
+                return sorted[lower];
+            }
+            
+            return sorted[lower] * (upper - index) + sorted[upper] * (index - lower);
+        }
+
         function processData(data, fileName) {
             if (!data || data.length === 0) {
-                alert('No data found in the file.');
+                showError('No data found in the file.');
                 return;
             }
 
@@ -593,23 +690,34 @@
             });
 
             if (currentData.length === 0) {
-                alert('No valid data rows found.');
+                showError('No valid data rows found.');
                 return;
             }
 
             const columns = Object.keys(currentData[0]);
+            columnStats = {};
 
-            const numericColumns = columns.filter(col => {
-                return currentData.some(row => {
-                    const value = row[col];
-                    return typeof value === 'number' && !isNaN(value) && value !== true && value !== false;
-                });
+            // Analyze each column
+            columns.forEach(col => {
+                columnStats[col] = analyzeColumnType(col, currentData);
             });
+
+            // Get analyzable columns (numeric, boolean, or categorical)
+            const analyzableColumns = columns.filter(col => 
+                columnStats[col].type !== 'empty'
+            );
 
             // Update UI
             document.getElementById('dataInfo').style.display = 'block';
             document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows)`;
-            document.getElementById('columnInfo').textContent = `Numeric columns available: ${numericColumns.length}`;
+            document.getElementById('columnInfo').textContent = `Total columns: ${columns.length}, Analyzable: ${analyzableColumns.length}`;
+            
+            const typeBreakdown = {};
+            Object.values(columnStats).forEach(stat => {
+                typeBreakdown[stat.type] = (typeBreakdown[stat.type] || 0) + 1;
+            });
+            document.getElementById('dataTypeInfo').textContent = 
+                `Types: ${Object.entries(typeBreakdown).map(([type, count]) => `${type}: ${count}`).join(', ')}`;
 
             // Populate column selectors
             const xSelect = document.getElementById('xColumn');
@@ -618,155 +726,97 @@
             xSelect.innerHTML = '<option value="">Select column...</option>';
             ySelect.innerHTML = '<option value="">Select column...</option>';
             
-            numericColumns.forEach(col => {
-                xSelect.innerHTML += `<option value="${col}">${col}</option>`;
-                ySelect.innerHTML += `<option value="${col}">${col}</option>`;
+            analyzableColumns.forEach(col => {
+                const type = columnStats[col].type;
+                xSelect.innerHTML += `<option value="${col}">${col} (${type})</option>`;
+                ySelect.innerHTML += `<option value="${col}">${col} (${type})</option>`;
             });
 
             document.getElementById('analysisSection').style.display = 'block';
+            hideError();
         }
 
-        function generateMatrix() {
+        function updateColumnInfo() {
             const xColumn = document.getElementById('xColumn').value;
             const yColumn = document.getElementById('yColumn').value;
-            const xThreshold = parseFloat(document.getElementById('xThreshold').value);
-            const yThreshold = parseFloat(document.getElementById('yThreshold').value);
 
-            if (!xColumn || !yColumn) {
-                alert('Please select both X and Y columns.');
-                return;
-            }
-
-            if (isNaN(xThreshold) || isNaN(yThreshold)) {
-                alert('Please enter valid threshold values.');
-                return;
-            }
-
-            // Filter valid data points
-            const validData = currentData.filter(row => {
-                const xVal = parseFloat(row[xColumn]);
-                const yVal = parseFloat(row[yColumn]);
-                return !isNaN(xVal) && !isNaN(yVal);
-            });
-
-            if (validData.length === 0) {
-                alert('No valid data points found for the selected columns.');
-                return;
-            }
-
-            // Categorize data into quadrants
-            const quadrants = {
-                q1: [], // High X, High Y
-                q2: [], // Low X, High Y  
-                q3: [], // Low X, Low Y
-                q4: []  // High X, Low Y
-            };
-
-            validData.forEach(row => {
-                const xVal = parseFloat(row[xColumn]);
-                const yVal = parseFloat(row[yColumn]);
-                
-                if (xVal >= xThreshold && yVal >= yThreshold) {
-                    quadrants.q1.push(row);
-                } else if (xVal < xThreshold && yVal >= yThreshold) {
-                    quadrants.q2.push(row);
-                } else if (xVal < xThreshold && yVal < yThreshold) {
-                    quadrants.q3.push(row);
-                } else {
-                    quadrants.q4.push(row);
-                }
-            });
-
-            matrixResults = {
-                xColumn,
-                yColumn,
-                xThreshold,
-                yThreshold,
-                quadrants,
-                totalPoints: validData.length
-            };
-
-            createMatrix();
-            updateStats();
-            document.getElementById('resultsSection').style.display = 'block';
+            updateColumnInfoDisplay('x', xColumn);
+            updateColumnInfoDisplay('y', yColumn);
         }
 
-        function createMatrix() {
-            // Update matrix title and labels
-            document.getElementById('matrixTitle').textContent = 
-                `${matrixResults.yColumn} vs ${matrixResults.xColumn} Matrix Analysis`;
+        function updateColumnInfoDisplay(axis, columnName) {
+            const infoDiv = document.getElementById(`${axis}ColumnInfo`);
             
-            // Update labels
-            document.getElementById('topLabel').textContent = `Weak ${matrixResults.xColumn}`;
-            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.xColumn}`;
-            document.getElementById('leftLabelTop').textContent = `Strong ${matrixResults.yColumn}`;
-            document.getElementById('leftLabelBottom').textContent = `Weak ${matrixResults.yColumn}`;
+            if (!columnName) {
+                infoDiv.style.display = 'none';
+                return;
+            }
 
-            // Update quadrant headers
-            document.getElementById('q1Header').textContent = 
-                `Strong ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q1.length} points)`;
-            document.getElementById('q2Header').textContent = 
-                `Weak ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q2.length} points)`;
-            document.getElementById('q3Header').textContent = 
-                `Weak ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q3.length} points)`;
-            document.getElementById('q4Header').textContent = 
-                `Strong ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q4.length} points)`;
+            const stats = columnStats[columnName];
+            let infoText = `Type: ${stats.type}`;
 
-            // Clear existing content
-            ['q1', 'q2', 'q3', 'q4'].forEach(quadrant => {
-                const content = document.getElementById(quadrant + 'Content');
-                content.innerHTML = '';
-            });
+            if (stats.type === 'numeric') {
+                infoText += ` | Range: ${stats.stats.min.toFixed(2)} - ${stats.stats.max.toFixed(2)} | Mean: ${stats.stats.mean.toFixed(2)} | Median: ${stats.stats.median.toFixed(2)}`;
+            } else if (stats.type === 'categorical') {
+                infoText += ` | Unique values: ${stats.uniqueValues.length} | Examples: ${stats.uniqueValues.slice(0, 3).join(', ')}`;
+            } else if (stats.type === 'boolean') {
+                const trueCount = stats.values.filter(v => v === true || v === 'true' || v === 1 || v === '1').length;
+                infoText += ` | True: ${trueCount}, False: ${stats.values.length - trueCount}`;
+            }
 
-            // Add data points to each quadrant
-            Object.keys(matrixResults.quadrants).forEach(quadrant => {
-                const points = matrixResults.quadrants[quadrant];
-                const container = document.getElementById(quadrant + 'Content');
-                
-                points.forEach((point, index) => {
-                    const dot = document.createElement('div');
-                    dot.className = `data-point ${quadrant}`;
-                    dot.textContent = index + 1;
-                    
-                    // Simple positioning - distribute points evenly
-                    const cols = Math.ceil(Math.sqrt(points.length));
-                    const row = Math.floor(index / cols);
-                    const col = index % cols;
-                    
-                    dot.style.left = `${(col + 1) * (100 / (cols + 1))}%`;
-                    dot.style.top = `${(row + 1) * 30 + 20}px`;
-                    
-                    container.appendChild(dot);
-                });
-            });
+            infoDiv.textContent = infoText;
+            infoDiv.style.display = 'block';
         }
 
-        function updateStats() {
-            const statsGrid = document.getElementById('statsGrid');
-            const total = matrixResults.totalPoints;
+        function updateThresholdInput() {
+            const xType = document.getElementById('xThresholdType').value;
+            const yType = document.getElementById('yThresholdType').value;
+            const xInput = document.getElementById('xThreshold');
+            const yInput = document.getElementById('yThreshold');
+
+            // Update placeholder text based on threshold type
+            if (xType === 'percentile') {
+                xInput.placeholder = 'Enter percentile (0-100)';
+            } else if (xType === 'value') {
+                xInput.placeholder = 'Enter threshold value';
+            } else {
+                xInput.placeholder = 'Auto-calculated';
+                xInput.value = '';
+            }
+
+            if (yType === 'percentile') {
+                yInput.placeholder = 'Enter percentile (0-100)';
+            } else if (yType === 'value') {
+                yInput.placeholder = 'Enter threshold value';
+            } else {
+                yInput.placeholder = 'Auto-calculated';
+                yInput.value = '';
+            }
+        }
+
+        function calculateThreshold(column, type, inputValue) {
+            const stats = columnStats[column];
             
-            const quadrantData = [
-                { key: 'q1', title: 'Strong X + Strong Y', color: '#11998e' },
-                { key: 'q2', title: 'Weak X + Strong Y', color: '#f59e0b' },
-                { key: 'q3', title: 'Weak X + Weak Y', color: '#ef4444' },
-                { key: 'q4', title: 'Strong X + Weak Y', color: '#8b5cf6' }
-            ];
-
-            statsGrid.innerHTML = '';
-            quadrantData.forEach(quad => {
-                const count = matrixResults.quadrants[quad.key].length;
-                const percentage = ((count / total) * 100).toFixed(1);
-                
-                const card = document.createElement('div');
-                card.className = `stat-card ${quad.key}`;
-                card.innerHTML = `
-                    <h4>${quad.title}</h4>
-                    <div class="count" style="color: ${quad.color}">${count}</div>
-                    <div class="percentage">${percentage}% of total</div>
-                `;
-                statsGrid.appendChild(card);
-            });
-        }
-    </script>
-</body>
-</html>
+            switch (type) {
+                case 'median':
+                    if (stats.type === 'numeric') return stats.stats.median;
+                    break;
+                case 'mean':
+                    if (stats.type === 'numeric') return stats.stats.mean;
+                    break;
+                case 'percentile':
+                    if (stats.type === 'numeric') {
+                        const percentile = parseFloat(inputValue);
+                        if (isNaN(percentile) || percentile < 0 || percentile > 100) {
+                            throw new Error('Percentile must be between 0 and 100');
+                        }
+                        return calculatePercentile(stats.values, percentile);
+                    }
+                    break;
+                case 'value':
+                default:
+                    if (stats.type === 'numeric') {
+                        const val = parseFloat(inputValue);
+                        if (isNaN(val)) throw new Error('Invalid numeric value');
+                        return val;
+                    } else if (stats
