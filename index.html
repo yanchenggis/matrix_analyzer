@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Matrix Analyzer</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
@@ -262,15 +263,15 @@
             grid-template-columns: 100px 1fr 1fr;
             grid-template-rows: 100px 1fr 1fr;
             gap: 1px;
-            background: #cbd5e1;
+            background: #e2e8f0;
             border-radius: 8px;
             overflow: hidden;
             min-height: 600px;
         }
 
         .matrix-label {
-            background: #64748b;
-            color: white;
+            background: #cbd5e1;
+            color: #1e293b;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -281,7 +282,8 @@
         }
 
         .matrix-label.corner {
-            background: #94a3b8;
+            background: #e2e8f0;
+            color: #1e293b;
         }
 
         .matrix-label.y-axis {
@@ -834,3 +836,10 @@
 
         function generateMatrix() {
             const
+
+        function showError(message) {
+            const errorBox = document.getElementById('errorMessage');
+            errorBox.textContent = message;
+            errorBox.style.display = 'block';
+        }
+
