@@ -819,4 +819,18 @@
                         const val = parseFloat(inputValue);
                         if (isNaN(val)) throw new Error('Invalid numeric value');
                         return val;
-                    } else if (stats
+                    } else if (stats.type === 'boolean') {
+                        if (inputValue === 'true' || inputValue === '1' || inputValue === 1) return 1;
+                        if (inputValue === 'false' || inputValue === '0' || inputValue === 0) return 0;
+                        throw new Error('Boolean threshold must be true/false or 1/0');
+                    } else if (stats.type === 'categorical') {
+                        return inputValue;
+                    }
+                    break;
+            }
+            
+            throw new Error(`Invalid threshold type ${type} for column type ${stats.type}`);
+        }
+
+        function generateMatrix() {
+            const
