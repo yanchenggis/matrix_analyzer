@@ -601,8 +601,8 @@
 
             const numericColumns = columns.filter(col => {
                 return currentData.some(row => {
-                    const value = parseFloat(row[col]);
-                    return !isNaN(value) && isFinite(value);
+                    const value = row[col];
+                    return typeof value === 'number' && !isNaN(value) && value !== true && value !== false;
                 });
             });
 
