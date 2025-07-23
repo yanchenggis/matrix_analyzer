@@ -14,26 +14,26 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
             padding: 20px;
-            color: #334155;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: white;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #64748b, #475569);
-            color: white;
+            background: #f6f8fa;
+            border-bottom: 1px solid #d0d7de;
+            color: #24292f;
             padding: 30px;
             text-align: center;
         }
@@ -41,12 +41,13 @@
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            font-weight: 700;
+            font-weight: 600;
+            color: #24292f;
         }
 
         .header p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: #656d76;
         }
 
         .content {
@@ -56,19 +57,20 @@
         .section {
             margin-bottom: 40px;
             padding: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border-left: 4px solid #64748b;
+            background: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            border-left: 4px solid #0969da;
         }
 
         .section h2 {
-            color: #475569;
+            color: #24292f;
             margin-bottom: 20px;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 600;
         }
 
         .section h2::before {
@@ -81,17 +83,16 @@
             flex-direction: column;
             align-items: center;
             padding: 40px;
-            border: 2px dashed #cbd5e1;
-            border-radius: 8px;
-            background: linear-gradient(45deg, #f8fafc, #f1f5f9);
+            border: 2px dashed #d0d7de;
+            border-radius: 6px;
+            background: white;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .file-upload:hover {
-            border-color: #64748b;
-            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
-            transform: translateY(-1px);
+            border-color: #0969da;
+            background: #f6f8fa;
         }
 
         .file-upload input {
@@ -101,18 +102,18 @@
         .file-upload-icon {
             font-size: 3rem;
             margin-bottom: 15px;
-            color: #64748b;
+            color: #656d76;
         }
 
         .file-upload-text {
             font-size: 1.2rem;
-            color: #475569;
+            color: #24292f;
             margin-bottom: 5px;
             font-weight: 600;
         }
 
         .file-upload-hint {
-            color: #64748b;
+            color: #656d76;
             font-size: 0.9rem;
         }
 
@@ -124,16 +125,17 @@
         }
 
         .control-group {
-            background: #f8fafc;
+            background: white;
             padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
         }
 
         .control-group h3 {
-            color: #475569;
+            color: #24292f;
             margin-bottom: 15px;
             font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .form-row {
@@ -143,26 +145,27 @@
             align-items: center;
         }
 
-        select, input[type="number"], input[type="text"] {
+        select, input[type="number"] {
             flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            border: 1px solid #d0d7de;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 14px;
             background: white;
             transition: border-color 0.3s ease;
         }
 
-        select:focus, input[type="number"]:focus, input[type="text"]:focus {
+        select:focus, input[type="number"]:focus {
             outline: none;
-            border-color: #64748b;
-            box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+            border-color: #0969da;
+            box-shadow: inset 0 1px 0 rgba(9, 105, 218, 0.075), 0 0 0 0.2em rgba(9, 105, 218, 0.3);
         }
 
         label {
             font-weight: 600;
-            color: #475569;
+            color: #24292f;
             min-width: 80px;
+            font-size: 14px;
         }
 
         .threshold-inputs {
@@ -173,88 +176,71 @@
         }
 
         .threshold-group {
-            background: white;
+            background: #f6f8fa;
             padding: 15px;
+            border: 1px solid #e1e4e8;
             border-radius: 6px;
-            border: 1px solid #e2e8f0;
         }
 
         .threshold-group h4 {
-            color: #475569;
+            color: #24292f;
             font-size: 0.9rem;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-
-        .threshold-type {
-            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .threshold-note {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
+            background: #dbeafe;
+            border: 1px solid #bfdbfe;
             padding: 15px;
             border-radius: 6px;
             margin-top: 15px;
             font-size: 0.95rem;
-            color: #475569;
+            color: #1e40af;
             line-height: 1.5;
         }
 
         .threshold-note strong {
-            color: #334155;
-        }
-
-        .column-info {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: #64748b;
+            color: #1e3a8a;
         }
 
         .btn {
-            background: linear-gradient(135deg, #64748b, #475569);
+            background: #0969da;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border-radius: 6px;
-            font-size: 1.1rem;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
+            transition: all 0.2s ease;
         }
 
         .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
+            background: #0860ca;
         }
 
         .btn:disabled {
-            background: #94a3b8;
+            background: #8c959f;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
         .matrix-container {
             margin-top: 30px;
             background: white;
-            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
             padding: 30px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .matrix-title {
             text-align: center;
             margin-bottom: 30px;
-            color: #475569;
+            color: #24292f;
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .matrix-grid {
@@ -262,27 +248,27 @@
             grid-template-columns: 100px 1fr 1fr;
             grid-template-rows: 100px 1fr 1fr;
             gap: 1px;
-            background: #e2e8f0;
-            border-radius: 8px;
+            background: #d0d7de;
+            border-radius: 6px;
             overflow: hidden;
             min-height: 600px;
         }
 
         .matrix-label {
-            background: #cbd5e1;
-            color: #1e293b;
+            background: #f6f8fa;
+            color: #24292f;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.9rem;
             text-align: center;
             padding: 10px;
+            border: 1px solid #e1e4e8;
         }
 
         .matrix-label.corner {
-            background: #e2e8f0;
-            color: #1e293b;
+            background: #e1e4e8;
         }
 
         .matrix-label.y-axis {
@@ -295,6 +281,7 @@
             position: relative;
             min-height: 250px;
             overflow: hidden;
+            border: 1px solid #e1e4e8;
         }
 
         .quadrant-header {
@@ -302,12 +289,12 @@
             top: 0;
             left: 0;
             right: 0;
-            background: #f8fafc;
+            background: #f6f8fa;
             padding: 10px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e1e4e8;
             font-size: 0.85rem;
-            font-weight: bold;
-            color: #475569;
+            font-weight: 600;
+            color: #24292f;
             text-align: center;
             z-index: 10;
         }
@@ -323,25 +310,44 @@
         }
 
         .data-point {
-            display: inline-block;
-            margin: 2px;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: white;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid white;
             cursor: pointer;
             transition: all 0.2s ease;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
         }
 
         .data-point:hover {
-            transform: scale(1.05);
+            transform: scale(1.3);
+            z-index: 15;
         }
 
-        .data-point.q1 { background: #22c55e; }
-        .data-point.q2 { background: #eab308; }
-        .data-point.q3 { background: #ef4444; }
-        .data-point.q4 { background: #3b82f6; }
+        .data-point.q1 { background: #0969da; }
+        .data-point.q2 { background: #fb8500; }
+        .data-point.q3 { background: #dc2626; }
+        .data-point.q4 { background: #7c3aed; }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            z-index: 20;
+            white-space: nowrap;
+            display: none;
+        }
 
         .stats-grid {
             display: grid;
@@ -353,8 +359,8 @@
         .stat-card {
             background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
             border-left: 4px solid;
             text-align: center;
         }
@@ -362,7 +368,8 @@
         .stat-card h4 {
             margin-bottom: 10px;
             font-size: 1rem;
-            color: #475569;
+            color: #24292f;
+            font-weight: 600;
         }
 
         .stat-card .count {
@@ -372,41 +379,53 @@
         }
 
         .stat-card .percentage {
-            color: #64748b;
+            color: #656d76;
             font-size: 0.9rem;
         }
 
-        .stat-card.q1 { border-left-color: #22c55e; }
-        .stat-card.q1 .count { color: #22c55e; }
-        .stat-card.q2 { border-left-color: #eab308; }
-        .stat-card.q2 .count { color: #eab308; }
-        .stat-card.q3 { border-left-color: #ef4444; }
-        .stat-card.q3 .count { color: #ef4444; }
-        .stat-card.q4 { border-left-color: #3b82f6; }
-        .stat-card.q4 .count { color: #3b82f6; }
+        .stat-card.q1 { 
+            border-left-color: #0969da; 
+        }
+        .stat-card.q1 .count { color: #0969da; }
+
+        .stat-card.q2 { 
+            border-left-color: #fb8500; 
+        }
+        .stat-card.q2 .count { color: #fb8500; }
+
+        .stat-card.q3 { 
+            border-left-color: #dc2626; 
+        }
+        .stat-card.q3 .count { color: #dc2626; }
+
+        .stat-card.q4 { 
+            border-left-color: #7c3aed; 
+        }
+        .stat-card.q4 .count { color: #7c3aed; }
 
         .data-info {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
             padding: 15px;
             border-radius: 6px;
             margin-bottom: 20px;
         }
 
         .data-info h4 {
-            color: #475569;
+            color: #24292f;
             margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .data-info p {
-            color: #64748b;
+            color: #656d76;
             margin: 5px 0;
         }
 
         .error-message {
-            background: #fee2e2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
+            background: #ffebe9;
+            border: 1px solid #ffcdd2;
+            color: #d73a49;
             padding: 15px;
             border-radius: 6px;
             margin-top: 15px;
@@ -437,7 +456,7 @@
     <div class="container">
         <div class="header">
             <h1>Universal Matrix Analyzer</h1>
-            <p>Visualize relationships between numeric variables with flexible threshold methods</p>
+            <p>Visualize relationships between any two variables with customizable thresholds</p>
         </div>
 
         <div class="content">
@@ -447,14 +466,13 @@
                     <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" />
                     <div class="file-upload-icon">📁</div>
                     <div class="file-upload-text">Click to upload your data file</div>
-                    <div class="file-upload-hint">Supports CSV, Excel (.xlsx, .xls)</div>
+                    <div class="file-upload-hint">Supports CSV and Excel formats</div>
                 </div>
                 
                 <div id="dataInfo" class="data-info" style="display: none;">
                     <h4>Data Summary</h4>
                     <p id="fileInfo"></p>
                     <p id="columnInfo"></p>
-                    <p id="dataTypeInfo"></p>
                 </div>
                 
                 <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -471,14 +489,12 @@
                                 <option value="">Select column...</option>
                             </select>
                         </div>
-                        <div id="xColumnInfo" class="column-info" style="display: none;"></div>
                         <div class="form-row">
                             <label>Y-Axis:</label>
                             <select id="yColumn">
                                 <option value="">Select column...</option>
                             </select>
                         </div>
-                        <div id="yColumnInfo" class="column-info" style="display: none;"></div>
                     </div>
 
                     <div class="control-group">
@@ -486,34 +502,18 @@
                         <div class="threshold-inputs">
                             <div class="threshold-group">
                                 <h4>X-Axis Threshold</h4>
-                                <div class="threshold-type">
-                                    <select id="xThresholdType">
-                                        <option value="value">Fixed Value</option>
-                                        <option value="median">Median</option>
-                                        <option value="mean">Mean</option>
-                                        <option value="percentile">Percentile</option>
-                                    </select>
-                                </div>
-                                <input type="number" id="xThreshold" step="any" placeholder="Enter threshold value">
+                                <input type="number" id="xThreshold" placeholder="Enter threshold value" step="0.1">
                             </div>
                             <div class="threshold-group">
                                 <h4>Y-Axis Threshold</h4>
-                                <div class="threshold-type">
-                                    <select id="yThresholdType">
-                                        <option value="value">Fixed Value</option>
-                                        <option value="median">Median</option>
-                                        <option value="mean">Mean</option>
-                                        <option value="percentile">Percentile</option>
-                                    </select>
-                                </div>
-                                <input type="number" id="yThreshold" step="any" placeholder="Enter threshold value">
+                                <input type="number" id="yThreshold" placeholder="Enter threshold value" step="0.1">
                             </div>
                         </div>
                         <div class="threshold-note">
-                            <strong>Threshold Types:</strong><br>
-                            • <strong>Fixed Value:</strong> Use a specific number<br>
-                            • <strong>Median/Mean:</strong> Automatically calculated from data<br>
-                            • <strong>Percentile:</strong> Enter percentile value (e.g., 75 for 75th percentile)
+                            <strong>How thresholds work:</strong><br>
+                            • Values <strong>≥ threshold</strong> = <strong>Strong</strong> (right/top quadrants)<br>
+                            • Values <strong>&lt; threshold</strong> = <strong>Weak</strong> (left/bottom quadrants)<br>
+                            Thresholds act as the center point - data is positioned relative to these values.
                         </div>
                     </div>
                 </div>
@@ -529,30 +529,30 @@
                     <div class="matrix-title" id="matrixTitle"></div>
                     <div class="matrix-grid">
                         <div class="matrix-label corner"></div>
-                        <div class="matrix-label" id="topLabel">Low X</div>
-                        <div class="matrix-label" id="topLabel2">High X</div>
-                        <div class="matrix-label y-axis" id="leftLabelTop">High Y</div>
+                        <div class="matrix-label" id="topLabel">Strong Y</div>
+                        <div class="matrix-label" id="topLabel2">Strong Y</div>
+                        <div class="matrix-label y-axis" id="leftLabelTop">Strong Y</div>
                         <div class="quadrant" id="q2">
-                            <div class="quadrant-header" id="q2Header">Q2: Low X, High Y</div>
+                            <div class="quadrant-header" id="q2Header"></div>
                             <div class="quadrant-content" id="q2Content"></div>
                         </div>
                         <div class="quadrant" id="q1">
-                            <div class="quadrant-header" id="q1Header">Q1: High X, High Y</div>
+                            <div class="quadrant-header" id="q1Header"></div>
                             <div class="quadrant-content" id="q1Content"></div>
                         </div>
-                        <div class="matrix-label y-axis" id="leftLabelBottom">Low Y</div>
+                        <div class="matrix-label y-axis" id="leftLabelBottom">Weak Y</div>
                         <div class="quadrant" id="q3">
-                            <div class="quadrant-header" id="q3Header">Q3: Low X, Low Y</div>
+                            <div class="quadrant-header" id="q3Header"></div>
                             <div class="quadrant-content" id="q3Content"></div>
                         </div>
                         <div class="quadrant" id="q4">
-                            <div class="quadrant-header" id="q4Header">Q4: High X, Low Y</div>
+                            <div class="quadrant-header" id="q4Header"></div>
                             <div class="quadrant-content" id="q4Content"></div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 20px; color: #64748b;">
-                        <strong>X-Axis:</strong> <span id="xAxisInfo">Low (left) ← Threshold → High (right)</span> | 
-                        <strong>Y-Axis:</strong> <span id="yAxisInfo">Low (bottom) ← Threshold → High (top)</span>
+                    <div style="text-align: center; margin-top: 20px; color: #24292f;">
+                        <strong>X-Axis:</strong> Weak (left) ← Threshold → Strong (right) | 
+                        <strong>Y-Axis:</strong> Weak (bottom) ← Threshold → Strong (top)
                     </div>
                 </div>
 
@@ -561,16 +561,13 @@
         </div>
     </div>
 
+    <div class="tooltip" id="tooltip"></div>
+
     <script>
         let currentData = [];
         let matrixResults = {};
-        let columnStats = {};
 
         document.getElementById('fileInput').addEventListener('change', handleFile);
-        document.getElementById('xColumn').addEventListener('change', updateColumnInfo);
-        document.getElementById('yColumn').addEventListener('change', updateColumnInfo);
-        document.getElementById('xThresholdType').addEventListener('change', updateThresholdInput);
-        document.getElementById('yThresholdType').addEventListener('change', updateThresholdInput);
 
         function handleFile(event) {
             const file = event.target.files[0];
@@ -602,56 +599,13 @@
             }
         }
 
-        function analyzeColumnType(columnName, data) {
-            const values = data.map(row => row[columnName]).filter(val => 
-                val !== null && val !== undefined && val !== ''
-            );
-            
-            if (values.length === 0) return { type: 'empty', values: [] };
-
-            // Check if all values are numbers (including integers and floats)
-            const numericValues = values.filter(val => 
-                typeof val === 'number' && !isNaN(val)
-            );
-            
-            // Determine type - only numeric columns are supported now
-            if (numericValues.length === values.length) {
-                const stats = {
-                    min: Math.min(...numericValues),
-                    max: Math.max(...numericValues),
-                    mean: numericValues.reduce((a, b) => a + b, 0) / numericValues.length,
-                    median: calculateMedian(numericValues)
-                };
-                return { type: 'numeric', values: numericValues, stats };
-            } else {
-                return { type: 'non-numeric', values: values };
-            }
-        }
-
-        function calculateMedian(arr) {
-            const sorted = [...arr].sort((a, b) => a - b);
-            const mid = Math.floor(sorted.length / 2);
-            return sorted.length % 2 === 0 
-                ? (sorted[mid - 1] + sorted[mid]) / 2 
-                : sorted[mid];
-        }
-
-        function calculatePercentile(arr, percentile) {
-            const sorted = [...arr].sort((a, b) => a - b);
-            const index = (percentile / 100) * (sorted.length - 1);
-            const lower = Math.floor(index);
-            const upper = Math.ceil(index);
-            
-            if (lower === upper) {
-                return sorted[lower];
-            }
-            
-            return sorted[lower] * (upper - index) + sorted[upper] * (index - lower);
+        function isNumeric(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value) && value !== null && value !== undefined && value !== '';
         }
 
         function processData(data, fileName) {
             if (!data || data.length === 0) {
-                showError('No data found in the file.');
+                alert('No data found in the file.');
                 return;
             }
 
@@ -662,41 +616,39 @@
             });
 
             if (currentData.length === 0) {
-                showError('No valid data rows found.');
+                alert('No valid data rows found.');
                 return;
             }
 
             const columns = Object.keys(currentData[0]);
-            columnStats = {};
-
-            // Analyze each column
-            columns.forEach(col => {
-                columnStats[col] = analyzeColumnType(col, currentData);
+            
+            // Improved numeric column detection
+            const numericColumns = columns.filter(col => {
+                // Check if at least 80% of non-empty values in this column are numeric
+                const nonEmptyValues = currentData
+                    .map(row => row[col])
+                    .filter(value => value !== null && value !== undefined && value !== '');
+                
+                if (nonEmptyValues.length === 0) return false;
+                
+                const numericValues = nonEmptyValues.filter(value => {
+                    // Check if it's a number (integer or float)
+                    const num = parseFloat(value);
+                    return !isNaN(num) && isFinite(num) && 
+                           typeof value !== 'boolean' && 
+                           typeof value !== 'string' || 
+                           (typeof value === 'string' && /^-?\d*\.?\d+$/.test(value.trim()));
+                });
+                
+                return numericValues.length / nonEmptyValues.length >= 0.8;
             });
-
-            // Get only numeric columns
-            const numericColumns = columns.filter(col => 
-                columnStats[col].type === 'numeric'
-            );
-
-            if (numericColumns.length < 2) {
-                showError('At least 2 numeric columns are required for matrix analysis.');
-                return;
-            }
 
             // Update UI
             document.getElementById('dataInfo').style.display = 'block';
             document.getElementById('fileInfo').textContent = `File: ${fileName} (${currentData.length} rows)`;
-            document.getElementById('columnInfo').textContent = `Total columns: ${columns.length}, Numeric: ${numericColumns.length}`;
-            
-            const typeBreakdown = {};
-            Object.values(columnStats).forEach(stat => {
-                typeBreakdown[stat.type] = (typeBreakdown[stat.type] || 0) + 1;
-            });
-            document.getElementById('dataTypeInfo').textContent = 
-                `Types: ${Object.entries(typeBreakdown).map(([type, count]) => `${type}: ${count}`).join(', ')}`;
+            document.getElementById('columnInfo').textContent = `Numeric columns available: ${numericColumns.length} (${numericColumns.join(', ')})`;
 
-            // Populate column selectors with only numeric columns
+            // Populate column selectors
             const xSelect = document.getElementById('xColumn');
             const ySelect = document.getElementById('yColumn');
             
@@ -704,128 +656,154 @@
             ySelect.innerHTML = '<option value="">Select column...</option>';
             
             numericColumns.forEach(col => {
-                xSelect.innerHTML += `<option value="${col}">${col} (numeric)</option>`;
-                ySelect.innerHTML += `<option value="${col}">${col} (numeric)</option>`;
+                xSelect.innerHTML += `<option value="${col}">${col}</option>`;
+                ySelect.innerHTML += `<option value="${col}">${col}</option>`;
             });
 
             document.getElementById('analysisSection').style.display = 'block';
-            hideError();
-        }
-
-        function updateColumnInfo() {
-            const xColumn = document.getElementById('xColumn').value;
-            const yColumn = document.getElementById('yColumn').value;
-
-            updateColumnInfoDisplay('x', xColumn);
-            updateColumnInfoDisplay('y', yColumn);
-        }
-
-        function updateColumnInfoDisplay(axis, columnName) {
-            const infoDiv = document.getElementById(`${axis}ColumnInfo`);
-            
-            if (!columnName) {
-                infoDiv.style.display = 'none';
-                return;
-            }
-
-            const stats = columnStats[columnName];
-            let infoText = `Type: ${stats.type}`;
-
-            if (stats.type === 'numeric') {
-                infoText += ` | Range: ${stats.stats.min.toFixed(2)} - ${stats.stats.max.toFixed(2)} | Mean: ${stats.stats.mean.toFixed(2)} | Median: ${stats.stats.median.toFixed(2)}`;
-            }
-
-            infoDiv.textContent = infoText;
-            infoDiv.style.display = 'block';
-        }
-
-        function updateThresholdInput() {
-            const xType = document.getElementById('xThresholdType').value;
-            const yType = document.getElementById('yThresholdType').value;
-            const xInput = document.getElementById('xThreshold');
-            const yInput = document.getElementById('yThreshold');
-
-            // Update placeholder text based on threshold type
-            if (xType === 'percentile') {
-                xInput.placeholder = 'Enter percentile (0-100)';
-            } else if (xType === 'value') {
-                xInput.placeholder = 'Enter threshold value';
-            } else {
-                xInput.placeholder = 'Auto-calculated';
-                xInput.value = '';
-            }
-
-            if (yType === 'percentile') {
-                yInput.placeholder = 'Enter percentile (0-100)';
-            } else if (yType === 'value') {
-                yInput.placeholder = 'Enter threshold value';
-            } else {
-                yInput.placeholder = 'Auto-calculated';
-                yInput.value = '';
-            }
-        }
-
-        function calculateThreshold(column, type, inputValue) {
-            const stats = columnStats[column];
-            
-            if (stats.type !== 'numeric') {
-                throw new Error('Only numeric columns are supported');
-            }
-            
-            switch (type) {
-                case 'median':
-                    return stats.stats.median;
-                case 'mean':
-                    return stats.stats.mean;
-                case 'percentile':
-                    const percentile = parseFloat(inputValue);
-                    if (isNaN(percentile) || percentile < 0 || percentile > 100) {
-                        throw new Error('Percentile must be between 0 and 100');
-                    }
-                    return calculatePercentile(stats.values, percentile);
-                case 'value':
-                default:
-                    const val = parseFloat(inputValue);
-                    if (isNaN(val)) throw new Error('Invalid numeric value');
-                    return val;
-            }
         }
 
         function generateMatrix() {
-            try {
-                const xColumn = document.getElementById('xColumn').value;
-                const yColumn = document.getElementById('yColumn').value;
-                const xThresholdType = document.getElementById('xThresholdType').value;
-                const yThresholdType = document.getElementById('yThresholdType').value;
-                const xThresholdInput = document.getElementById('xThreshold').value;
-                const yThresholdInput = document.getElementById('yThreshold').value;
+            const xColumn = document.getElementById('xColumn').value;
+            const yColumn = document.getElementById('yColumn').value;
+            const xThreshold = parseFloat(document.getElementById('xThreshold').value);
+            const yThreshold = parseFloat(document.getElementById('yThreshold').value);
 
-                if (!xColumn || !yColumn) {
-                    showError('Please select both X and Y columns.');
-                    return;
-                }
+            if (!xColumn || !yColumn) {
+                alert('Please select both X and Y columns.');
+                return;
+            }
 
-                if (xColumn === yColumn) {
-                    showError('X and Y columns must be different.');
-                    return;
-                }
+            if (isNaN(xThreshold) || isNaN(yThreshold)) {
+                alert('Please enter valid threshold values.');
+                return;
+            }
 
-                // Calculate thresholds
-                const xThreshold = calculateThreshold(xColumn, xThresholdType, xThresholdInput);
-                const yThreshold = calculateThreshold(yColumn, yThresholdType, yThresholdInput);
+            // Filter valid data points
+            const validData = currentData.filter(row => {
+                const xVal = parseFloat(row[xColumn]);
+                const yVal = parseFloat(row[yColumn]);
+                return !isNaN(xVal) && !isNaN(yVal) && isFinite(xVal) && isFinite(yVal);
+            });
 
-                // Categorize data points into quadrants
-                const quadrants = { q1: [], q2: [], q3: [], q4: [] };
+            if (validData.length === 0) {
+                alert('No valid data points found for the selected columns.');
+                return;
+            }
+
+            // Categorize data into quadrants
+            const quadrants = {
+                q1: [], // High X, High Y
+                q2: [], // Low X, High Y  
+                q3: [], // Low X, Low Y
+                q4: []  // High X, Low Y
+            };
+
+            validData.forEach(row => {
+                const xVal = parseFloat(row[xColumn]);
+                const yVal = parseFloat(row[yColumn]);
                 
-                currentData.forEach((row, index) => {
-                    const xValue = parseFloat(row[xColumn]);
-                    const yValue = parseFloat(row[yColumn]);
+                if (xVal >= xThreshold && yVal >= yThreshold) {
+                    quadrants.q1.push(row);
+                } else if (xVal < xThreshold && yVal >= yThreshold) {
+                    quadrants.q2.push(row);
+                } else if (xVal < xThreshold && yVal < yThreshold) {
+                    quadrants.q3.push(row);
+                } else {
+                    quadrants.q4.push(row);
+                }
+            });
+
+            matrixResults = {
+                xColumn,
+                yColumn,
+                xThreshold,
+                yThreshold,
+                quadrants,
+                totalPoints: validData.length
+            };
+
+            createMatrix();
+            updateStats();
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function createMatrix() {
+            // Update matrix title and labels
+            document.getElementById('matrixTitle').textContent = 
+                `${matrixResults.yColumn} vs ${matrixResults.xColumn} Matrix Analysis`;
+            
+            // Update labels
+            document.getElementById('topLabel').textContent = `Strong ${matrixResults.yColumn}`;
+            document.getElementById('topLabel2').textContent = `Strong ${matrixResults.yColumn}`;
+            document.getElementById('leftLabelTop').textContent = `Strong ${matrixResults.yColumn}`;
+            document.getElementById('leftLabelBottom').textContent = `Weak ${matrixResults.yColumn}`;
+
+            // Update quadrant headers
+            document.getElementById('q1Header').textContent = 
+                `Strong ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q1.length} points)`;
+            document.getElementById('q2Header').textContent = 
+                `Weak ${matrixResults.xColumn} + Strong ${matrixResults.yColumn} (${matrixResults.quadrants.q2.length} points)`;
+            document.getElementById('q3Header').textContent = 
+                `Weak ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q3.length} points)`;
+            document.getElementById('q4Header').textContent = 
+                `Strong ${matrixResults.xColumn} + Weak ${matrixResults.yColumn} (${matrixResults.quadrants.q4.length} points)`;
+
+            // Clear existing content
+            ['q1', 'q2', 'q3', 'q4'].forEach(quadrant => {
+                const content = document.getElementById(quadrant + 'Content');
+                content.innerHTML = '';
+            });
+
+            // Add data points to each quadrant
+            Object.keys(matrixResults.quadrants).forEach(quadrant => {
+                const points = matrixResults.quadrants[quadrant];
+                const container = document.getElementById(quadrant + 'Content');
+                
+                points.forEach((point, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = `data-point ${quadrant}`;
+                    dot.textContent = index + 1;
                     
-                    if (isNaN(xValue) || isNaN(yValue)) return;
+                    // Simple positioning - distribute points evenly
+                    const cols = Math.ceil(Math.sqrt(points.length));
+                    const row = Math.floor(index / cols);
+                    const col = index % cols;
                     
-                    const dataPoint = { index, xValue, yValue, row };
+                    dot.style.left = `${(col + 1) * (100 / (cols + 1))}%`;
+                    dot.style.top = `${(row + 1) * 30 + 20}px`;
                     
-                    if (xValue >= xThreshold && yValue >= yThreshold) {
-                        quadrants.q1.push(dataPoint); // High X, High Y
-                    } else if (xValue < xThreshold && yValue >= yThreshold) {
-                        quadrants.q2.push(dataPoint); // Low X,
+                    container.appendChild(dot);
+                });
+            });
+        }
+
+        function updateStats() {
+            const statsGrid = document.getElementById('statsGrid');
+            const total = matrixResults.totalPoints;
+            
+            const quadrantData = [
+                { key: 'q1', title: 'Strong X + Strong Y', color: '#0969da' },
+                { key: 'q2', title: 'Weak X + Strong Y', color: '#fb8500' },
+                { key: 'q3', title: 'Weak X + Weak Y', color: '#dc2626' },
+                { key: 'q4', title: 'Strong X + Weak Y', color: '#7c3aed' }
+            ];
+
+            statsGrid.innerHTML = '';
+            quadrantData.forEach(quad => {
+                const count = matrixResults.quadrants[quad.key].length;
+                const percentage = ((count / total) * 100).toFixed(1);
+                
+                const card = document.createElement('div');
+                card.className = `stat-card ${quad.key}`;
+                card.innerHTML = `
+                    <h4>${quad.title}</h4>
+                    <div class="count" style="color: ${quad.color}">${count}</div>
+                    <div class="percentage">${percentage}% of total</div>
+                `;
+                statsGrid.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
