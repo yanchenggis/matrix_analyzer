@@ -334,7 +334,7 @@
         .data-point.q1 { background: #0969da; }
         .data-point.q2 { background: #fb8500; }
         .data-point.q3 { background: #dc2626; }
-        .data-point.q4 { background: #7c3aed; }
+        .data-point.q4 { background: #10b981; }
 
         .tooltip {
             position: absolute;
@@ -399,9 +399,9 @@
         .stat-card.q3 .count { color: #dc2626; }
 
         .stat-card.q4 { 
-            border-left-color: #7c3aed; 
+            border-left-color: #10b981; 
         }
-        .stat-card.q4 .count { color: #7c3aed; }
+        .stat-card.q4 .count { color: #10b981; }
 
         .data-info {
             background: #f6f8fa;
@@ -449,6 +449,44 @@
                 grid-template-rows: 80px 1fr 1fr;
                 min-height: 500px;
             }
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .email-link {
+            color: #0969da;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 2px solid #0969da;
+        }
+
+        .email-link:hover {
+            background: #0969da;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .copyright { 
+            text-align:center; 
+            font-size:0.9rem; 
+            color:#777; 
+            margin-top:40px; 
         }
     </style>
 </head>
@@ -562,6 +600,18 @@
     </div>
 
     <div class="tooltip" id="tooltip"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Get in touch:</p>
+                <a href="mailto:yanchenggis@gmail.com" class="email-link">yanchenggis@gmail.com</a>
+            </div>
+            <div class="copyright">
+                © 2025 yanchenggis. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <script>
         let currentData = [];
